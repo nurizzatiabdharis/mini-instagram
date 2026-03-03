@@ -3,83 +3,35 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
+import { capitalize } from "@mui/material/utils";
 import RouterLink from "next/link";
 import { Iconify } from "src/minimal/iconify";
 import { Image } from "src/minimal/image";
-import useSWR from "swr";
+import { useGetPostById, useGetPostComments } from "src/swr/posts";
+import type { Post, PostCommentsResponse } from "src/types/posts";
 import { CommentItem } from "./CommentItem";
-
-type Comment = {
-	id: string;
-	postId: string;
-	author: string;
-	text: string;
-	createdAt: string;
-};
-
-type DetailsResponse = {
-	postId: string;
-	items: Comment[];
-};
-
-const fetcher = async (url: string): Promise<DetailsResponse> => {
-	const res = await fetch(url, {
-		headers: {
-			"x-api-key": "ivapikey123",
-		},
-	});
-	if (!res.ok) throw new Error(`Fetch failed: ${res.status}`);
-	return res.json();
-};
+import ErrorDisplay from "./ErrorDisplay";
+import Loader from "./Loader";
 
 export default function Details({
 	postId,
-	comments,
+	postComments,
 	postInfo,
 }: {
 	postId: string;
-	comments?: Comment[];
-	postInfo?: {
-		id: string;
-		imageUrl: string;
-		caption: string;
-		author: string;
-		likes: number;
-		createdAt: string;
-	};
+	postComments?: PostCommentsResponse;
+	postInfo?: Post;
 }) {
-	const { data, error, isLoading } = useSWR<DetailsResponse>(
-		`https://mini-instagram-api.mistcloud.workers.dev/api/comments/${postId}`,
-		fetcher,
-		{ fallbackData: comments ? { postId, items: comments } : undefined },
-	);
-
-	const postFetcher = async (url: string) => {
-		const res = await fetch(url, {
-			headers: { "x-api-key": "ivapikey123" },
-		});
-		if (!res.ok) throw new Error(`Fetch failed: ${res.status}`);
-		return res.json();
-	};
-
+	const { data, error, isLoading } = useGetPostComments(postId, postComments);
 	const {
-		data: postData,
+		data: info,
 		error: postError,
 		isLoading: postLoading,
-	} = useSWR(
-		postInfo
-			? null
-			: `https://mini-instagram-api.mistcloud.workers.dev/api/posts/${postId}`,
-		postFetcher,
-	);
-
-	if (error) return <div>Error loading comments</div>;
-	if (isLoading) return <div>Loading comments...</div>;
-	if (postError) return <div>Error loading post info</div>;
-	if (postLoading && !postInfo) return <div>Loading post info...</div>;
+	} = useGetPostById(postId, postInfo);
+	if (error || postError) return <ErrorDisplay />;
+	if (isLoading || postLoading || !info) return <Loader />;
 
 	const items = data?.items || [];
-	const info = postInfo || postData;
 
 	const renderImageAndInfo = () => (
 		<Box sx={{ p: 2 }}>
@@ -93,7 +45,8 @@ export default function Details({
 				{info.caption}
 			</Typography>
 			<Typography variant="subtitle1" color="text.secondary">
-				By {info.author} &bull; {new Date(info.createdAt).toLocaleString()}
+				By {capitalize(info.author)} &bull;{" "}
+				{new Date(info.createdAt).toLocaleString()}
 			</Typography>
 			<Box
 				sx={{
@@ -156,7 +109,7 @@ export default function Details({
 				href={"/"}
 				startIcon={<Iconify width={16} icon="eva:arrow-ios-back-fill" />}
 			>
-				Back to home
+				Back
 			</Button>
 
 			<Grid container size={12}>

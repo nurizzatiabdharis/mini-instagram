@@ -4,7 +4,10 @@ import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import IconButton from "@mui/material/IconButton";
 import ListItemText from "@mui/material/ListItemText";
+import { useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { capitalize } from "@mui/material/utils";
 import RouterLink from "next/link";
 import { Iconify } from "src/minimal/iconify";
 import { Image } from "src/minimal/image";
@@ -40,6 +43,9 @@ type ItemProps = BoxProps & {
 };
 
 function Item({ item }: ItemProps) {
+	const theme = useTheme();
+	const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
 	return (
 		<Card
 			sx={{
@@ -53,7 +59,7 @@ function Item({ item }: ItemProps) {
 				sx={{ position: "absolute", top: 8, right: 8, zIndex: 1 }}
 				size="small"
 			>
-				<Iconify icon="solar:eye-bold" />
+				<Iconify icon="solar:eye-bold" sx={{ color: "text.disabled" }} />
 			</IconButton>
 
 			<Box
@@ -71,7 +77,7 @@ function Item({ item }: ItemProps) {
 						{item.author.charAt(0).toUpperCase()}
 					</Avatar>
 					<ListItemText
-						primary={item.author}
+						primary={capitalize(item.author)}
 						secondary={new Date(item.createdAt).toLocaleString()}
 						slotProps={{
 							secondary: {
@@ -108,11 +114,22 @@ function Item({ item }: ItemProps) {
 				variant="filled"
 				sx={{ right: 16, zIndex: 9, bottom: 16, position: "absolute" }}
 			>
-				<Iconify width={16} icon="solar:heart-bold" sx={{ flexShrink: 0 }} />
+				<Iconify
+					width={16}
+					icon="solar:heart-bold"
+					sx={{ flexShrink: 0 }}
+					color="red"
+				/>
 				{item.likes} likes
 			</Label>
 
-			<Box sx={{ p: 1, position: "relative", maxWidth: "500px" }}>
+			<Box
+				sx={{
+					p: 1,
+					position: "relative",
+					width: isMobile ? 300 : 500,
+				}}
+			>
 				<Image
 					alt={item.caption}
 					src={item.imageUrl}

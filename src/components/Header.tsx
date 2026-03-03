@@ -2,7 +2,7 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
-export function Header() {
+export default function Header() {
 	return (
 		<Box
 			sx={{
@@ -22,5 +22,3 @@ export function Header() {
 		</Box>
 	);
 }
-
-export default Header;

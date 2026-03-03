@@ -1,6 +1,7 @@
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import { capitalize } from "@mui/material/utils";
 
 type Props = {
 	name: string;
@@ -29,7 +30,7 @@ export function CommentItem({ name, message, postedAt }: Props) {
 				}}
 			>
 				<Typography variant="subtitle2" sx={{ mb: 0.5 }}>
-					{name}
+					{capitalize(name)}
 				</Typography>
 
 				<Typography variant="caption" sx={{ color: "text.disabled" }}>

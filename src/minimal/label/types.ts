@@ -1,16 +1,16 @@
-import type { LabelRoot } from './styles';
-import type { PaletteColorKey, CommonColorsKeys } from 'src/theme/core';
+import type { CommonColorsKeys, PaletteColorKey } from "src/theme/core";
+import type { LabelRoot } from "./styles";
 
 // ----------------------------------------------------------------------
 
-export type LabelColor = PaletteColorKey | CommonColorsKeys | 'default';
+export type LabelColor = PaletteColorKey | CommonColorsKeys | "default";
 
-export type LabelVariant = 'filled' | 'outlined' | 'soft' | 'inverted';
+export type LabelVariant = "filled" | "outlined" | "soft" | "inverted";
 
 export interface LabelProps extends React.ComponentProps<typeof LabelRoot> {
-  disabled?: boolean;
-  color?: LabelColor;
-  variant?: LabelVariant;
-  endIcon?: React.ReactNode;
-  startIcon?: React.ReactNode;
+	disabled?: boolean;
+	color?: LabelColor;
+	variant?: LabelVariant;
+	endIcon?: React.ReactNode;
+	startIcon?: React.ReactNode;
 }
