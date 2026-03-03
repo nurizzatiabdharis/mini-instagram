@@ -9,9 +9,24 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@emotion/cache": "^11.14.0",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@fontsource-variable/public-sans": "^5.2.7",
+    "@fontsource/barlow": "^5.2.8",
+    "@iconify/react": "^6.0.2",
+    "@mui/lab": "^7.0.1-beta.22",
+    "@mui/material": "^7.3.8",
+    "@mui/material-nextjs": "^7.3.8",
+    "@mui/x-data-grid": "^8.27.3",
+    "@mui/x-date-pickers": "^8.27.2",
+    "@mui/x-tree-view": "^8.27.2",
+    "framer-motion": "^12.23.26",
+    "minimal-shared": "^1.1.5",
     "next": "16.1.6",
     "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "react-dom": "19.2.3",
+    "swr": "^2.4.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
