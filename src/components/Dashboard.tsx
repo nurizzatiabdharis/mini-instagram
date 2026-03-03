@@ -47,41 +47,23 @@ export default function Dashboard({ initialData }: { initialData: ApiData }) {
 	if (isLoading) return <div>Loading...</div>;
 
 	return (
-		<>
-			<Box
-				sx={{
-					position: "fixed",
-					top: 0,
-					left: 0,
-					width: "100%",
-					bgcolor: "background.paper",
-					zIndex: 1100,
-					boxShadow: 1,
-					py: 2,
-					px: 3,
-					textAlign: "center",
-				}}
-			>
-				<Typography variant="h5">Mini Instagram</Typography>
-			</Box>
-			<Box
-				sx={{
-					p: 5,
-					pt: 10,
-					gap: 2,
-					display: "flex",
-					alignContent: "center",
-					justifyContent: "center",
-					flexDirection: "column",
-					margin: "0 auto",
-					alignItems: "center",
-				}}
-			>
-				<Posts
-					subheader={`${data?.items.length} bookings`}
-					list={data?.items || []}
-				/>
-			</Box>
-		</>
+		<Box
+			sx={{
+				p: 2,
+				pt: 10,
+				gap: 2,
+				display: "flex",
+				alignContent: "center",
+				justifyContent: "center",
+				flexDirection: "column",
+				margin: "0 auto",
+				alignItems: "center",
+			}}
+		>
+			<Posts
+				subheader={`${data?.items.length} bookings`}
+				list={data?.items || []}
+			/>
+		</Box>
 	);
 }

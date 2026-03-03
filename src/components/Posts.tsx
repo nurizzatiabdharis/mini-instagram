@@ -1,14 +1,14 @@
 import Avatar from "@mui/material/Avatar";
 import type { BoxProps } from "@mui/material/Box";
 import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
 import IconButton from "@mui/material/IconButton";
 import ListItemText from "@mui/material/ListItemText";
-
+import Typography from "@mui/material/Typography";
+import RouterLink from "next/link";
 import { Iconify } from "src/minimal/iconify";
 import { Image } from "src/minimal/image";
 import { Label } from "src/minimal/label";
-
-// ----------------------------------------------------------------------
 
 type Props = BoxProps & {
 	title?: string;
@@ -23,9 +23,9 @@ type Props = BoxProps & {
 	}[];
 };
 
-export function Posts({ list, sx, ...other }: Props) {
+export function Posts({ list }: Props) {
 	return (
-		<Box sx={[{ py: 2 }, ...(Array.isArray(sx) ? sx : [sx])]} {...other}>
+		<Box>
 			{list.map((item) => (
 				<Item key={item.id} item={item} />
 			))}
@@ -39,26 +39,21 @@ type ItemProps = BoxProps & {
 	item: Props["list"][number];
 };
 
-function Item({ item, sx, ...other }: ItemProps) {
+function Item({ item }: ItemProps) {
 	return (
-		<Box
-			sx={[
-				{
-					width: "50vh",
-					mb: 2,
-					borderRadius: 2,
-					position: "relative",
-					bgcolor: "background.neutral",
-				},
-				...(Array.isArray(sx) ? sx : [sx]),
-			]}
-			{...other}
+		<Card
+			sx={{
+				mb: 2,
+				borderRadius: 2,
+			}}
 		>
 			<IconButton
+				component={RouterLink}
+				href={`/${item.id}/details`}
 				sx={{ position: "absolute", top: 8, right: 8, zIndex: 1 }}
 				size="small"
 			>
-				<Iconify icon="eva:more-vertical-fill" />
+				<Iconify icon="solar:eye-bold" />
 			</IconButton>
 
 			<Box
@@ -72,10 +67,12 @@ function Item({ item, sx, ...other }: ItemProps) {
 				}}
 			>
 				<Box sx={{ gap: 2, display: "flex", alignItems: "center" }}>
-					<Avatar alt={item.author} src={item.imageUrl} />
+					<Avatar alt={item.author} color="primary">
+						{item.author.charAt(0).toUpperCase()}
+					</Avatar>
 					<ListItemText
 						primary={item.author}
-						secondary={item.createdAt}
+						secondary={new Date(item.createdAt).toLocaleString()}
 						slotProps={{
 							secondary: {
 								sx: {
@@ -100,12 +97,9 @@ function Item({ item, sx, ...other }: ItemProps) {
 					}}
 				>
 					<Box sx={{ gap: 0.5, display: "flex", alignItems: "center" }}>
-						<Iconify
-							width={16}
-							icon="solar:users-group-rounded-bold"
-							sx={{ flexShrink: 0 }}
-						/>
-						{item.likes} likes
+						<Typography variant="body1" sx={{ color: "text.primary" }}>
+							{item.caption}
+						</Typography>
 					</Box>
 				</Box>
 			</Box>
@@ -114,10 +108,11 @@ function Item({ item, sx, ...other }: ItemProps) {
 				variant="filled"
 				sx={{ right: 16, zIndex: 9, bottom: 16, position: "absolute" }}
 			>
-				{item.caption}
+				<Iconify width={16} icon="solar:heart-bold" sx={{ flexShrink: 0 }} />
+				{item.likes} likes
 			</Label>
 
-			<Box sx={{ p: 1, position: "relative" }}>
+			<Box sx={{ p: 1, position: "relative", maxWidth: "500px" }}>
 				<Image
 					alt={item.caption}
 					src={item.imageUrl}
@@ -125,6 +120,6 @@ function Item({ item, sx, ...other }: ItemProps) {
 					sx={{ borderRadius: 1.5 }}
 				/>
 			</Box>
-		</Box>
+		</Card>
 	);
 }

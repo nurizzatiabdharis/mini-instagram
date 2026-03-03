@@ -5,6 +5,7 @@ import InitColorSchemeScript from "@mui/material/InitColorSchemeScript";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
 
 import type { Metadata } from "next";
+import Header from "src/components/Header";
 import { ThemeProvider, themeConfig } from "src/theme";
 
 export const metadata: Metadata = {
@@ -28,6 +29,7 @@ export default function RootLayout({
 						defaultMode={themeConfig.defaultMode}
 						modeStorageKey={themeConfig.modeStorageKey}
 					>
+						<Header />
 						{children}
 					</ThemeProvider>
 				</AppRouterCacheProvider>
