@@ -1,6 +1,6 @@
-import { Typography } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
 import FormHelperText from "@mui/material/FormHelperText";
+import Typography from "@mui/material/Typography";
 import { mergeClasses } from "minimal-shared/utils";
 import { useDropzone } from "react-dropzone";
 import { Iconify } from "../iconify";

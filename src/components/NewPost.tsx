@@ -1,4 +1,5 @@
 "use client";
+
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -6,12 +7,17 @@ import Typography from "@mui/material/Typography";
 import { useRouter } from "next/navigation";
 import { useCallback, useState } from "react";
 import { toast } from "sonner";
+import { createPost } from "src/services/api";
+import { useGetPostsInfinite } from "src/swr/posts";
 import { Iconify } from "src/theme/minimal/iconify";
 import { Upload } from "src/theme/minimal/upload";
 import BackButton from "./BackButton";
+import CaptionInput from "./CaptionInput";
 
 export default function NewPost() {
+	const { mutate } = useGetPostsInfinite();
 	const router = useRouter();
+	const [author, setAuthor] = useState("");
 	const [caption, setCaption] = useState("");
 	const [file, setFile] = useState<File | string | null>(null);
 
@@ -35,11 +41,17 @@ export default function NewPost() {
 		setFile(file);
 	}, []);
 
-	const onSubmit = () => {
-		console.log("Caption:", caption);
-		console.log("File:", file instanceof File ? file.name : file);
-		toast.success("Post created successfully!");
-		router.push("/");
+	const onSubmit = async () => {
+		if (!(file instanceof File)) return;
+		try {
+			await createPost(file, caption, author);
+			toast.success("Post created successfully!");
+			mutate();
+			router.push("/");
+		} catch (err) {
+			console.error(err);
+			toast.error("Failed to create post. Please try again.");
+		}
 	};
 
 	return (
@@ -56,22 +68,29 @@ export default function NewPost() {
 			<Typography variant="h4" sx={{ my: 2 }}>
 				New post
 			</Typography>
-			<TextField
-				fullWidth
-				size="small"
-				placeholder="What's on your mind?"
-				value={caption}
-				onChange={(e) => setCaption(e.target.value)}
-				multiline
-				rows={3}
-				sx={{ mb: 2 }}
-			/>
-			<Upload
-				value={file}
-				onDrop={handleDropSingleFile}
-				onDelete={() => setFile(null)}
-			/>
-			<Box sx={{ mt: 2, display: "flex", justifyContent: "flex-end" }}>
+			<Box
+				sx={{
+					display: "flex",
+					flexDirection: "column",
+					justifyContent: "flex-end",
+					gap: 2,
+				}}
+			>
+				<Upload
+					value={file}
+					onDrop={handleDropSingleFile}
+					onDelete={() => setFile(null)}
+				/>
+				<TextField
+					fullWidth
+					size="small"
+					placeholder="Author"
+					value={author}
+					onChange={(e) => setAuthor(e.target.value)}
+				/>
+				<CaptionInput caption={caption} setCaption={setCaption} />
+			</Box>
+			<Box sx={{ display: "flex", justifyContent: "flex-end" }}>
 				<Button
 					variant="contained"
 					sx={{ mt: 2 }}

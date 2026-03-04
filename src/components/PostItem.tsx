@@ -3,9 +3,7 @@ import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import IconButton from "@mui/material/IconButton";
 import ListItemText from "@mui/material/ListItemText";
-import { useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
-import useMediaQuery from "@mui/material/useMediaQuery";
 import { capitalize } from "@mui/material/utils";
 import RouterLink from "next/link";
 import { Iconify } from "src/theme/minimal/iconify";
@@ -18,9 +16,6 @@ type Props = {
 };
 
 export default function PostItem({ item }: Props) {
-	const theme = useTheme();
-	const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-
 	const renderTopInfo = () => (
 		<Box
 			sx={{
@@ -75,7 +70,6 @@ export default function PostItem({ item }: Props) {
 			sx={{
 				p: 1,
 				position: "relative",
-				width: isMobile ? 300 : 500,
 			}}
 		>
 			<Image

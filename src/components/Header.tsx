@@ -1,8 +1,17 @@
 "use client";
+
 import Box from "@mui/material/Box";
+import IconButton from "@mui/material/IconButton";
+import { useColorScheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
+import { useSettingsContext } from "src/context/SettingsProvider";
+import { Iconify } from "src/theme/minimal/iconify";
+import { Image } from "src/theme/minimal/image";
 
 export default function Header() {
+	const settings = useSettingsContext();
+	const { setMode, colorScheme } = useColorScheme();
+
 	return (
 		<Box
 			sx={{
@@ -16,9 +25,43 @@ export default function Header() {
 				py: 2,
 				px: 3,
 				textAlign: "center",
+				display: "flex",
+				alignItems: "center",
+				justifyContent: "space-between",
 			}}
 		>
-			<Typography variant="h5">Mini Instagram</Typography>
+			<Box
+				sx={{
+					display: "flex",
+					flexDirection: "row",
+					alignItems: "center",
+					gap: 1,
+				}}
+			>
+				<Image
+					src="assets/app-icon.png"
+					alt="Logo"
+					ratio="1/1"
+					sx={{ width: "25px", height: "25px" }}
+				/>
+				<Typography variant="h5">Mini Instagram</Typography>
+			</Box>
+
+			<IconButton
+				sx={{ ml: 1 }}
+				onClick={() => {
+					console.log("Toggle light/dark mode");
+					setMode(colorScheme === "light" ? "dark" : "light");
+					settings.setState({
+						mode: colorScheme === "light" ? "dark" : "light",
+					});
+				}}
+				aria-label="Toggle light/dark mode"
+			>
+				<Iconify
+					icon={colorScheme === "light" ? "solar:moon-bold" : "solar:sun-bold"}
+				/>
+			</IconButton>
 		</Box>
 	);
 }

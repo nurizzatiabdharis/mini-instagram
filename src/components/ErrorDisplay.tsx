@@ -1,9 +1,9 @@
 "use client";
-import { Box } from "@mui/material";
+
+import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
-
 import RouterLink from "next/link";
 import { ServerErrorIllustration } from "src/theme/illustrations";
 
