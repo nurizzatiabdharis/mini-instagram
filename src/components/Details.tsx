@@ -1,27 +1,24 @@
 "use client";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { capitalize } from "@mui/material/utils";
-import RouterLink from "next/link";
-import { Iconify } from "src/minimal/iconify";
-import { Image } from "src/minimal/image";
 import { useGetPostById, useGetPostComments } from "src/swr/posts";
+import { Iconify } from "src/theme/minimal/iconify";
+import { Image } from "src/theme/minimal/image";
 import type { Post, PostCommentsResponse } from "src/types/posts";
-import { CommentItem } from "./CommentItem";
+import BackButton from "./BackButton";
+import CommentItem from "./CommentItem";
 import ErrorDisplay from "./ErrorDisplay";
 import Loader from "./Loader";
 
-export default function Details({
-	postId,
-	postComments,
-	postInfo,
-}: {
+type Props = {
 	postId: string;
 	postComments?: PostCommentsResponse;
 	postInfo?: Post;
-}) {
+};
+
+export default function Details({ postId, postComments, postInfo }: Props) {
 	const { data, error, isLoading } = useGetPostComments(postId, postComments);
 	const {
 		data: info,
@@ -56,7 +53,11 @@ export default function Details({
 					gap: 1,
 				}}
 			>
-				<Iconify width={16} icon="solar:heart-bold" sx={{ flexShrink: 0 }} />
+				<Iconify
+					width={16}
+					icon="solar:heart-bold"
+					sx={{ flexShrink: 0, color: "error.main" }}
+				/>
 				<Typography variant="body2" color="text.secondary">
 					{info.likes} likes
 				</Typography>
@@ -104,14 +105,7 @@ export default function Details({
 				maxWidth: 800,
 			}}
 		>
-			<Button
-				component={RouterLink}
-				href={"/"}
-				startIcon={<Iconify width={16} icon="eva:arrow-ios-back-fill" />}
-			>
-				Back
-			</Button>
-
+			<BackButton />
 			<Grid container size={12}>
 				<Grid size={{ xs: 12, md: 7, lg: 8 }}>{renderImageAndInfo()}</Grid>
 				<Grid size={{ xs: 12, md: 5, lg: 4 }}>{renderComments()}</Grid>

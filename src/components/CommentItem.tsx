@@ -9,7 +9,7 @@ type Props = {
 	postedAt: string;
 };
 
-export function CommentItem({ name, message, postedAt }: Props) {
+export default function CommentItem({ name, message, postedAt }: Props) {
 	return (
 		<Box
 			sx={{
@@ -32,11 +32,9 @@ export function CommentItem({ name, message, postedAt }: Props) {
 				<Typography variant="subtitle2" sx={{ mb: 0.5 }}>
 					{capitalize(name)}
 				</Typography>
-
 				<Typography variant="caption" sx={{ color: "text.disabled" }}>
 					{new Date(postedAt).toLocaleString()}
 				</Typography>
-
 				<Typography variant="body2" sx={{ mt: 1 }}>
 					{message}
 				</Typography>

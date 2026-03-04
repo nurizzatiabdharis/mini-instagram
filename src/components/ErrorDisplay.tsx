@@ -15,17 +15,14 @@ export default function ErrorDisplay() {
 					500 Internal server error
 				</Typography>
 			</Box>
-
 			<Box>
 				<Typography sx={{ color: "text.secondary" }}>
 					There was an error, please try again later.
 				</Typography>
 			</Box>
-
 			<Box>
 				<ServerErrorIllustration sx={{ my: { xs: 5, sm: 10 } }} />
 			</Box>
-
 			<Button component={RouterLink} href="/" size="large" variant="contained">
 				Go to home
 			</Button>

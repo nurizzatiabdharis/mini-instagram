@@ -2,18 +2,18 @@
 import Box from "@mui/material/Box";
 import Fab from "@mui/material/Fab";
 import RouterLink from "next/link";
-import { Iconify } from "src/minimal/iconify";
 import { useGetPostList } from "src/swr/posts";
+import { Iconify } from "src/theme/minimal/iconify";
 import type { ListPostResponse } from "src/types/posts";
 import ErrorDisplay from "./ErrorDisplay";
 import Loader from "./Loader";
-import { Posts } from "./Posts";
+import PostItem from "./PostItem";
 
-export default function Dashboard({
-	initialData,
-}: {
+type Props = {
 	initialData: ListPostResponse;
-}) {
+};
+
+export default function Dashboard({ initialData }: Props) {
 	const { data, error, isLoading } = useGetPostList(initialData);
 
 	if (error) return <ErrorDisplay />;
@@ -33,10 +33,11 @@ export default function Dashboard({
 					alignItems: "center",
 				}}
 			>
-				<Posts
-					subheader={`${data?.items.length} bookings`}
-					list={data?.items || []}
-				/>
+				<Box>
+					{data?.items.map((item) => (
+						<PostItem key={item.id} item={item} />
+					))}
+				</Box>
 			</Box>
 			<Box
 				sx={{
