@@ -1,0 +1,34 @@
+{
+	"details": {
+		"likes": "Suka",
+		"by": "Oleh",
+		"comments": "Komen",
+		"noComments": "Tiada komen dijumpai untuk siaran ini."
+	},
+	"newPost": {
+		"title": "Siaran baharu",
+		"author": "Penulis",
+		"caption": "Apa yang anda fikirkan?",
+		"dropImage": "Lepaskan atau pilih gambar"
+	},
+	"button": {
+		"back": "Kembali",
+		"loadMore": "Muat lagi",
+		"submit": "Hantar",
+		"noMorePosts": "Tiada lagi siaran",
+		"loading": "Memuatkan...",
+		"goHome": "Pergi ke Laman Utama"
+	},
+	"success": {
+		"postCreated": "Siaran berjaya dibuat!"
+	},
+	"error": {
+		"pageNotFound": "Maaf, halaman tidak dijumpai!",
+		"notFoundDescription": "Maaf, kami tidak dapat mencari halaman yang anda cari. Mungkin anda tersalah menaip URL? Sila semak ejaan anda.",
+		"unsupportedFormat": "Format fail tidak disokong.",
+		"fileSize": "Saiz fail mesti kurang daripada 1 MB.",
+		"failedCreatePost": "Gagal membuat siaran. Sila cuba lagi.",
+		"server": "500 Ralat pelayan dalaman.",
+		"default": "Ralat telah berlaku. Sila cuba lagi kemudian."
+	}
+}

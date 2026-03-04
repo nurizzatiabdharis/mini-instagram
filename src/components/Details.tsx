@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { capitalize } from "@mui/material/utils";
+import { useTranslation } from "react-i18next";
 import { useGetPostById, useGetPostComments } from "src/swr/posts";
 import { Iconify } from "src/theme/minimal/iconify";
 import { Image } from "src/theme/minimal/image";
@@ -20,6 +21,7 @@ type Props = {
 };
 
 export default function Details({ postId, postComments, postInfo }: Props) {
+	const { t } = useTranslation();
 	const { data, error, isLoading } = useGetPostComments(postId, postComments);
 	const {
 		data: info,
@@ -44,7 +46,7 @@ export default function Details({ postId, postComments, postInfo }: Props) {
 				{info.caption}
 			</Typography>
 			<Typography variant="subtitle1" color="text.secondary">
-				By {capitalize(info.author)} &bull;{" "}
+				{t("details.by")} {capitalize(info.author)} &bull;{" "}
 				{new Date(info.createdAt).toLocaleString()}
 			</Typography>
 			<Box
@@ -61,7 +63,7 @@ export default function Details({ postId, postComments, postInfo }: Props) {
 					sx={{ flexShrink: 0, color: "error.main" }}
 				/>
 				<Typography variant="body2" color="text.secondary">
-					{info.likes} likes
+					{info.likes} {t("details.likes")}
 				</Typography>
 			</Box>
 		</Box>
@@ -78,7 +80,7 @@ export default function Details({ postId, postComments, postInfo }: Props) {
 			}}
 		>
 			<Typography variant="h6" gutterBottom>
-				Comments
+				{t("details.comments")}
 			</Typography>
 			{items.length > 0 ? (
 				items.map((comment) => (
@@ -91,7 +93,7 @@ export default function Details({ postId, postComments, postInfo }: Props) {
 				))
 			) : (
 				<Typography variant="body1" color="text.secondary">
-					No comments found for this post.
+					{t("details.noComments")}
 				</Typography>
 			)}
 		</Box>

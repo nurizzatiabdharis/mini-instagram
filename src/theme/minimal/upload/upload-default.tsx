@@ -27,6 +27,7 @@ export function Upload({
 	slotProps,
 	loading = false,
 	multiple = false,
+	placeholder,
 	...dropzoneOptions
 }: UploadProps) {
 	const { getRootProps, getInputProps, isDragActive, isDragReject } =
@@ -48,7 +49,7 @@ export function Upload({
 				sx={{ color: "text.disabled" }}
 			/>
 			<Typography variant="h6" sx={{ mt: 2 }} color="text.disabled">
-				Drop or select a photo
+				{placeholder || "Select"}
 			</Typography>
 		</PlaceholderContainer>
 	);

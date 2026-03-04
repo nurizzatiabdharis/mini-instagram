@@ -5,14 +5,17 @@ import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import RouterLink from "next/link";
+import { useTranslation } from "react-i18next";
 import PageNotFoundIllustration from "src/theme/illustrations/page-not-found-illustration";
 
 export default function NotFound() {
+	const { t } = useTranslation();
+
 	return (
 		<Container sx={{ textAlign: "center", margin: "0 auto", pt: 10 }}>
 			<Box>
 				<Typography variant="h3" sx={{ mb: 2 }} data-testid="not-found-title">
-					Sorry, page not found!
+					{t("error.pageNotFound")}
 				</Typography>
 			</Box>
 			<Box>
@@ -20,8 +23,7 @@ export default function NotFound() {
 					sx={{ color: "text.secondary" }}
 					data-testid="not-found-description"
 				>
-					Sorry, we couldn’t find the page you’re looking for. Perhaps you’ve
-					mistyped the URL? Be sure to check your spelling.
+					{t("error.notFoundDescription")}
 				</Typography>
 			</Box>
 			<Box>
@@ -34,7 +36,7 @@ export default function NotFound() {
 				variant="contained"
 				data-testid="go-home-button"
 			>
-				Go to home
+				{t("button.goHome")}
 			</Button>
 		</Container>
 	);

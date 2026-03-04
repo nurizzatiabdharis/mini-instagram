@@ -4,8 +4,8 @@ import type {
 	PostCommentsResponse,
 } from "src/types/posts";
 
-const API_URL = "https://mini-instagram-api.mistcloud.workers.dev/api";
-const API_KEY = "ivapikey123";
+const API_URL = process.env.NEXT_PUBLIC_SERVER_URL || "";
+const API_KEY = process.env.NEXT_PUBLIC_API_KEY || "";
 const HEADERS = { "x-api-key": API_KEY };
 
 const fetchApi = async <T>(endpoint: string): Promise<T> => {

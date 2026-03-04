@@ -5,6 +5,7 @@ import Button from "@mui/material/Button";
 import Fab from "@mui/material/Fab";
 import Grid from "@mui/material/Grid";
 import RouterLink from "next/link";
+import { useTranslation } from "react-i18next";
 import { useGetPostsInfinite } from "src/swr/posts";
 import { Iconify } from "src/theme/minimal/iconify";
 import type { ListPostResponse } from "src/types/posts";
@@ -17,6 +18,7 @@ type Props = {
 };
 
 export default function Dashboard({ initialData }: Props) {
+	const { t } = useTranslation();
 	const {
 		items,
 		size,
@@ -56,13 +58,13 @@ export default function Dashboard({ initialData }: Props) {
 					color="primary"
 					disabled={isReachingEnd || isValidating}
 					onClick={() => setSize(size + 1)}
-					sx={{ padding: "10px 14px", width: "150px" }}
+					sx={{ padding: "10px 14px", minWidth: "150px" }}
 				>
 					{isReachingEnd
-						? "No more posts"
+						? t("button.noMorePosts")
 						: isValidating
-							? "Loading…"
-							: "Load more"}
+							? t("button.loading")
+							: t("button.loadMore")}
 				</Button>
 			</Box>
 

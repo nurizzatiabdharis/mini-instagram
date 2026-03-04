@@ -25,9 +25,7 @@ describe("CaptionInput", () => {
 	});
 
 	it("renders input and emoji button", () => {
-		expect(
-			screen.getByPlaceholderText("What's on your mind?"),
-		).toBeInTheDocument();
+		expect(screen.getByPlaceholderText("newPost.caption")).toBeInTheDocument();
 		expect(screen.getByText("😊")).toBeInTheDocument();
 	});
 
@@ -37,7 +35,7 @@ describe("CaptionInput", () => {
 	});
 
 	it("calls setCaption on input change", () => {
-		fireEvent.change(screen.getByPlaceholderText("What's on your mind?"), {
+		fireEvent.change(screen.getByPlaceholderText("newPost.caption"), {
 			target: { value: "new caption" },
 		});
 		expect(setCaption).toHaveBeenCalledWith("new caption");

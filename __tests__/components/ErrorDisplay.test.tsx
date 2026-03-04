@@ -11,8 +11,8 @@ jest.mock("@theme/illustrations", () => ({
 describe("ErrorDisplay", () => {
 	it("renders error message and button", () => {
 		renderWithProviders(<ErrorDisplay />);
-		expect(screen.getByText("500 Internal server error")).toBeInTheDocument();
-		expect(screen.getByText(/There was an error/)).toBeInTheDocument();
+		expect(screen.getByText("error.server")).toBeInTheDocument();
+		expect(screen.getByText("error.default")).toBeInTheDocument();
 		expect(screen.getByTestId("go-home-button")).toBeInTheDocument();
 		expect(screen.getByTestId("server-error-illustration")).toBeInTheDocument();
 	});

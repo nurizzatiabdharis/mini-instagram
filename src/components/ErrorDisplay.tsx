@@ -5,19 +5,22 @@ import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import RouterLink from "next/link";
+import { useTranslation } from "react-i18next";
 import { ServerErrorIllustration } from "src/theme/illustrations";
 
 export default function ErrorDisplay() {
+	const { t } = useTranslation();
+
 	return (
 		<Container sx={{ textAlign: "center", margin: "0 auto", pt: 10 }}>
 			<Box>
 				<Typography variant="h3" sx={{ mb: 2 }}>
-					500 Internal server error
+					{t("error.server")}
 				</Typography>
 			</Box>
 			<Box>
 				<Typography sx={{ color: "text.secondary" }}>
-					There was an error, please try again later.
+					{t("error.default")}
 				</Typography>
 			</Box>
 			<Box>
@@ -30,7 +33,7 @@ export default function ErrorDisplay() {
 				variant="contained"
 				data-testid="go-home-button"
 			>
-				Go to home
+				{t("button.goHome")}
 			</Button>
 		</Container>
 	);

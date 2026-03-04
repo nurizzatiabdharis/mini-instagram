@@ -1,11 +1,17 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import Header from "src/components/Header";
 
+jest.mock("@components/LanguageChanger", () => ({
+	__esModule: true,
+	default: () => <span data-testid="LanguageChangerMock" />,
+}));
+
 describe("Header", () => {
 	it("renders logo and title", () => {
 		render(<Header />);
 		expect(screen.getByAltText("Logo")).toBeInTheDocument();
 		expect(screen.getByText("Mini Instagram")).toBeInTheDocument();
+		expect(screen.getByTestId("LanguageChangerMock")).toBeInTheDocument();
 	});
 
 	it("renders toggle button", () => {

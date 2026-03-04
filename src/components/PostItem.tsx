@@ -6,6 +6,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Typography from "@mui/material/Typography";
 import { capitalize } from "@mui/material/utils";
 import RouterLink from "next/link";
+import { useTranslation } from "react-i18next";
 import { Iconify } from "src/theme/minimal/iconify";
 import { Image } from "src/theme/minimal/image";
 import { Label } from "src/theme/minimal/label";
@@ -16,6 +17,7 @@ type Props = {
 };
 
 export default function PostItem({ item }: Props) {
+	const { t } = useTranslation();
 	const renderTopInfo = () => (
 		<Box
 			sx={{
@@ -107,7 +109,7 @@ export default function PostItem({ item }: Props) {
 					icon="solar:heart-bold"
 					sx={{ flexShrink: 0, color: "error.main" }}
 				/>
-				{item.likes} likes
+				{item.likes} {t("details.likes")}
 			</Label>
 		</Card>
 	);

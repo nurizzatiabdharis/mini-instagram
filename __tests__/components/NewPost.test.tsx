@@ -73,16 +73,16 @@ describe("NewPost", () => {
 
 	it("renders form fields and submit button", () => {
 		renderWithProviders(<NewPost />);
-		expect(screen.getByPlaceholderText("Author")).toBeInTheDocument();
+		expect(screen.getByPlaceholderText(/author/i)).toBeInTheDocument();
 		expect(screen.getByTestId("caption-input")).toBeInTheDocument();
 		expect(screen.getByTestId("upload")).toBeInTheDocument();
-		expect(screen.getByRole("button", { name: /Submit/i })).toBeInTheDocument();
+		expect(screen.getByRole("button", { name: /submit/i })).toBeInTheDocument();
 	});
 
 	it("submits form and calls createPost, mutate, and router.push", async () => {
 		renderWithProviders(<NewPost />);
 
-		fireEvent.change(screen.getByPlaceholderText("Author"), {
+		fireEvent.change(screen.getByPlaceholderText(/author/i), {
 			target: { value: "alice" },
 		});
 
@@ -91,7 +91,7 @@ describe("NewPost", () => {
 		});
 
 		fireEvent.change(screen.getByTestId("upload"));
-		const submitBtn = screen.getByRole("button", { name: /Submit/i });
+		const submitBtn = screen.getByRole("button", { name: /submit/i });
 		fireEvent.click(submitBtn);
 
 		await waitFor(() => {
@@ -101,7 +101,7 @@ describe("NewPost", () => {
 				"alice",
 			);
 			expect(mockPush).toHaveBeenCalledWith("/");
-			expect(toast.success).toHaveBeenCalledWith("Post created successfully!");
+			expect(toast.success).toHaveBeenCalledWith("success.postCreated");
 		});
 	});
 
@@ -111,20 +111,18 @@ describe("NewPost", () => {
 		);
 		renderWithProviders(<NewPost />);
 
-		fireEvent.change(screen.getByPlaceholderText("Author"), {
+		fireEvent.change(screen.getByPlaceholderText(/author/i), {
 			target: { value: "alice" },
 		});
 		fireEvent.change(screen.getByTestId("caption-input"), {
 			target: { value: "Hello world!" },
 		});
 		fireEvent.change(screen.getByTestId("upload"));
-		const submitBtn = screen.getByRole("button", { name: /Submit/i });
+		const submitBtn = screen.getByRole("button", { name: /submit/i });
 		fireEvent.click(submitBtn);
 
 		await waitFor(() => {
-			expect(toast.error).toHaveBeenCalledWith(
-				"Failed to create post. Please try again.",
-			);
+			expect(toast.error).toHaveBeenCalledWith("error.failedCreatePost");
 		});
 	});
 
@@ -134,7 +132,7 @@ describe("NewPost", () => {
 		fireEvent.change(screen.getByTestId("upload"), {
 			target: { files: [file] },
 		});
-		expect(toast.error).toHaveBeenCalledWith("Unsupported file format");
+		expect(toast.error).toHaveBeenCalledWith("error.unsupportedFormat");
 	});
 
 	it("shows error toast if file size is too large", () => {
@@ -145,8 +143,6 @@ describe("NewPost", () => {
 		fireEvent.change(screen.getByTestId("upload"), {
 			target: { files: [bigFile] },
 		});
-		expect(toast.error).toHaveBeenCalledWith(
-			"File size must be less than 1 MB.",
-		);
+		expect(toast.error).toHaveBeenCalledWith("error.fileSize");
 	});
 });

@@ -9,6 +9,7 @@ import EmojiPicker, {
 	type Theme,
 } from "emoji-picker-react";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Iconify } from "src/theme/minimal/iconify";
 
 type Props = {
@@ -17,6 +18,7 @@ type Props = {
 };
 
 export default function CaptionInput({ caption, setCaption }: Props) {
+	const { t } = useTranslation();
 	const { mode } = useColorScheme();
 	const [open, setOpen] = useState(false);
 
@@ -32,7 +34,7 @@ export default function CaptionInput({ caption, setCaption }: Props) {
 			<TextField
 				fullWidth
 				size="small"
-				placeholder="What's on your mind?"
+				placeholder={t("newPost.caption")}
 				value={caption}
 				onChange={(e) => setCaption(e.target.value)}
 				slotProps={{

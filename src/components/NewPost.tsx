@@ -6,6 +6,7 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { useRouter } from "next/navigation";
 import { useCallback, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 import { createPost } from "src/services/api";
 import { useGetPostsInfinite } from "src/swr/posts";
@@ -15,31 +16,35 @@ import BackButton from "./BackButton";
 import CaptionInput from "./CaptionInput";
 
 export default function NewPost() {
+	const { t } = useTranslation();
 	const { mutate } = useGetPostsInfinite();
 	const router = useRouter();
 	const [author, setAuthor] = useState("");
 	const [caption, setCaption] = useState("");
 	const [file, setFile] = useState<File | string | null>(null);
 
-	const handleDropSingleFile = useCallback((acceptedFiles: File[]) => {
-		const file = acceptedFiles[0];
-		if (!file) return;
+	const handleDropSingleFile = useCallback(
+		(acceptedFiles: File[]) => {
+			const file = acceptedFiles[0];
+			if (!file) return;
 
-		const allowedExtensions = ["jpg", "jpeg", "png", "gif", "bmp", "webp"];
-		const fileExtension = file.name.split(".").pop()?.toLowerCase();
+			const allowedExtensions = ["jpg", "jpeg", "png", "gif", "bmp", "webp"];
+			const fileExtension = file.name.split(".").pop()?.toLowerCase();
 
-		if (!fileExtension || !allowedExtensions.includes(fileExtension)) {
-			toast.error("Unsupported file format");
-			return;
-		}
+			if (!fileExtension || !allowedExtensions.includes(fileExtension)) {
+				toast.error(t("error.unsupportedFormat"));
+				return;
+			}
 
-		if (file.size > 1024 * 1024) {
-			toast.error("File size must be less than 1 MB.");
-			return;
-		}
+			if (file.size > 1024 * 1024) {
+				toast.error(t("error.fileSize"));
+				return;
+			}
 
-		setFile(file);
-	}, []);
+			setFile(file);
+		},
+		[t],
+	);
 
 	const onSubmit = async () => {
 		if (!(file instanceof File)) return;
@@ -47,11 +52,11 @@ export default function NewPost() {
 
 		try {
 			await createPost(file, caption, author);
-			toast.success("Post created successfully!");
+			toast.success(t("success.postCreated"));
 			mutate();
 			router.push("/");
 		} catch {
-			toast.error("Failed to create post. Please try again.");
+			toast.error(t("error.failedCreatePost"));
 		}
 	};
 
@@ -67,7 +72,7 @@ export default function NewPost() {
 		>
 			<BackButton />
 			<Typography variant="h4" sx={{ my: 2 }}>
-				New post
+				{t("newPost.title")}
 			</Typography>
 			<Box
 				sx={{
@@ -81,11 +86,12 @@ export default function NewPost() {
 					value={file}
 					onDrop={handleDropSingleFile}
 					onDelete={() => setFile(null)}
+					placeholder={t("newPost.dropImage")}
 				/>
 				<TextField
 					fullWidth
 					size="small"
-					placeholder="Author"
+					placeholder={t("newPost.author")}
 					value={author}
 					onChange={(e) => setAuthor(e.target.value)}
 				/>
@@ -100,7 +106,7 @@ export default function NewPost() {
 					disabled={!caption || !file}
 					onClick={onSubmit}
 				>
-					Submit
+					{t("button.submit")}
 				</Button>
 			</Box>
 		</Box>

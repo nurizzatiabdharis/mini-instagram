@@ -52,17 +52,17 @@ describe("Details", () => {
 		});
 		renderWithProviders(<Details postId="1" />);
 		expect(screen.getByText("A test caption")).toBeInTheDocument();
-		expect(screen.getByText(/By Alice/)).toBeInTheDocument();
-		expect(screen.getByText(/42 likes/)).toBeInTheDocument();
+		expect(screen.getByText(/details.by alice/i)).toBeInTheDocument();
+		expect(screen.getByText(/42 details.likes/i)).toBeInTheDocument();
 		expect(screen.getByTestId("details-image")).toHaveAttribute(
 			"src",
 			"test.jpg",
 		);
-		expect(screen.getByText("Comments")).toBeInTheDocument();
+		expect(screen.getByText("details.comments")).toBeInTheDocument();
 		expect(screen.getByTestId("CommentItemMock")).toBeInTheDocument();
 	});
 
-	it("shows 'No comments found for this post.' if items empty", () => {
+	it("shows 'details.noComments' if items empty", () => {
 		mockUseGetPostComments.mockReturnValue({
 			data: {
 				items: [],
@@ -71,7 +71,7 @@ describe("Details", () => {
 			isLoading: false,
 		});
 		renderWithProviders(<Details postId="1" />);
-		expect(screen.getByText("No comments found for this post.")).toBeInTheDocument();
+		expect(screen.getByText("details.noComments")).toBeInTheDocument();
 	});
 
 	it("renders ErrorDisplay when error is true", () => {

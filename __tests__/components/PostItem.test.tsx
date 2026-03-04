@@ -16,7 +16,7 @@ describe("PostItem", () => {
 		renderWithProviders(<PostItem item={post} />);
 		expect(screen.getByText("Alice")).toBeInTheDocument();
 		expect(screen.getByText("A test caption")).toBeInTheDocument();
-		expect(screen.getByText(/42 likes/)).toBeInTheDocument();
+		expect(screen.getByText(/42 details.likes/)).toBeInTheDocument();
 		expect(screen.getByTestId("post-image")).toHaveAttribute("src", "test.jpg");
 	});
 

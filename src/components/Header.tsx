@@ -6,6 +6,7 @@ import { useColorScheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import { Iconify } from "src/theme/minimal/iconify";
 import { Image } from "src/theme/minimal/image";
+import LanguageChanger from "./LanguageChanger";
 
 export default function Header() {
 	const { setMode, colorScheme } = useColorScheme();
@@ -37,25 +38,36 @@ export default function Header() {
 				}}
 			>
 				<Image
-					src="assets/app-icon.png"
+					src="/assets/app-icon.png"
 					alt="Logo"
 					ratio="1/1"
 					sx={{ width: "25px", height: "25px" }}
 				/>
 				<Typography variant="h5">Mini Instagram</Typography>
 			</Box>
-
-			<IconButton
-				sx={{ ml: 1 }}
-				onClick={() => {
-					setMode(colorScheme === "light" ? "dark" : "light");
+			<Box
+				sx={{
+					display: "flex",
+					flexDirection: "row",
+					alignItems: "center",
+					gap: 1,
 				}}
-				aria-label="Toggle mode"
 			>
-				<Iconify
-					icon={colorScheme === "light" ? "solar:moon-bold" : "solar:sun-bold"}
-				/>
-			</IconButton>
+				<LanguageChanger />
+				<IconButton
+					sx={{ ml: 1 }}
+					onClick={() => {
+						setMode(colorScheme === "light" ? "dark" : "light");
+					}}
+					aria-label="Toggle mode"
+				>
+					<Iconify
+						icon={
+							colorScheme === "light" ? "solar:moon-bold" : "solar:sun-bold"
+						}
+					/>
+				</IconButton>
+			</Box>
 		</Box>
 	);
 }
