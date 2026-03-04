@@ -13,6 +13,7 @@ export default function Loader() {
 				transform: "translate(-50%, -50%)",
 				color: "primary.main",
 			}}
+			data-testid="loader"
 		>
 			<CircularProgress />
 		</Box>

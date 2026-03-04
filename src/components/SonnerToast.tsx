@@ -1,6 +1,6 @@
 "use client";
 
-import { useColorScheme } from "node_modules/@mui/material/esm/styles/ThemeProviderWithVars";
+import { useColorScheme } from "@mui/material/styles";
 import { Toaster } from "sonner";
 import { Iconify } from "src/theme/minimal/iconify";
 
@@ -21,6 +21,7 @@ export default function SonnerToast() {
 					<Iconify icon="solar:danger-bold" sx={{ color: "error.main" }} />
 				),
 			}}
+			data-testid="sonner-toast"
 		/>
 	);
 }

@@ -4,12 +4,10 @@ import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import { useColorScheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
-import { useSettingsContext } from "src/context/SettingsProvider";
 import { Iconify } from "src/theme/minimal/iconify";
 import { Image } from "src/theme/minimal/image";
 
 export default function Header() {
-	const settings = useSettingsContext();
 	const { setMode, colorScheme } = useColorScheme();
 
 	return (
@@ -50,13 +48,9 @@ export default function Header() {
 			<IconButton
 				sx={{ ml: 1 }}
 				onClick={() => {
-					console.log("Toggle light/dark mode");
 					setMode(colorScheme === "light" ? "dark" : "light");
-					settings.setState({
-						mode: colorScheme === "light" ? "dark" : "light",
-					});
 				}}
-				aria-label="Toggle light/dark mode"
+				aria-label="Toggle mode"
 			>
 				<Iconify
 					icon={colorScheme === "light" ? "solar:moon-bold" : "solar:sun-bold"}

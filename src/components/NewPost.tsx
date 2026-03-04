@@ -43,13 +43,14 @@ export default function NewPost() {
 
 	const onSubmit = async () => {
 		if (!(file instanceof File)) return;
+		if (!author?.trim() || !caption?.trim()) return;
+
 		try {
 			await createPost(file, caption, author);
 			toast.success("Post created successfully!");
 			mutate();
 			router.push("/");
-		} catch (err) {
-			console.error(err);
+		} catch {
 			toast.error("Failed to create post. Please try again.");
 		}
 	};

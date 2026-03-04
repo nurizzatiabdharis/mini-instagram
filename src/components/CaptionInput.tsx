@@ -1,13 +1,13 @@
 import Box from "@mui/material/Box";
+import IconButton from "@mui/material/IconButton";
 import InputAdornment from "@mui/material/InputAdornment";
 import Modal from "@mui/material/Modal";
+import { useColorScheme } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import EmojiPicker, {
 	type EmojiClickData,
 	type Theme,
 } from "emoji-picker-react";
-import IconButton from "node_modules/@mui/material/esm/IconButton/IconButton";
-import { useColorScheme } from "node_modules/@mui/material/esm/styles/ThemeProviderWithVars";
 import { useState } from "react";
 import { Iconify } from "src/theme/minimal/iconify";
 

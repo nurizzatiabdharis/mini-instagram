@@ -8,6 +8,7 @@ export default function BackButton() {
 			component={RouterLink}
 			href={"/"}
 			startIcon={<Iconify width={16} icon="eva:arrow-ios-back-fill" />}
+			data-testid="back-button"
 		>
 			Back
 		</Button>

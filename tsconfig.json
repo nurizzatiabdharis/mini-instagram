@@ -23,7 +23,17 @@
 		"strictNullChecks": true,
 
 		/* Plugins */
-		"plugins": [{ "name": "next" }]
+		"plugins": [{ "name": "next" }],
+
+		/* Paths */
+		"paths": {
+			"@components/*": ["src/components/*"],
+			"@services/*": ["src/services/*"],
+			"@customTypes/*": ["src/types/*"],
+			"@swr/*": ["src/swr/*"],
+			"@service/*": ["src/service/*"],
+			"@tests/*": ["__tests__/*"]
+		}
 	},
 	"include": [
 		"next-env.d.ts",

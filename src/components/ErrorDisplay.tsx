@@ -23,7 +23,13 @@ export default function ErrorDisplay() {
 			<Box>
 				<ServerErrorIllustration sx={{ my: { xs: 5, sm: 10 } }} />
 			</Box>
-			<Button component={RouterLink} href="/" size="large" variant="contained">
+			<Button
+				component={RouterLink}
+				href="/"
+				size="large"
+				variant="contained"
+				data-testid="go-home-button"
+			>
 				Go to home
 			</Button>
 		</Container>

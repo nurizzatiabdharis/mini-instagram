@@ -38,6 +38,7 @@ export default function Details({ postId, postComments, postInfo }: Props) {
 				src={info.imageUrl}
 				ratio="1/1"
 				sx={{ borderRadius: 1.5 }}
+				data-testid="details-image"
 			/>
 			<Typography variant="h5" sx={{ mt: 2 }}>
 				{info.caption}
