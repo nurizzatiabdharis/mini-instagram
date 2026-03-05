@@ -57,7 +57,7 @@ describe("Dashboard", () => {
 		expect(screen.getByText("A test caption")).toBeInTheDocument();
 		expect(screen.getByText("Another caption")).toBeInTheDocument();
 		expect(
-			screen.getByRole("button", { name: /button.loadMore/i }),
+			screen.getByRole("button", { name: /loadMore/i }),
 		).toBeInTheDocument();
 	});
 
@@ -68,7 +68,7 @@ describe("Dashboard", () => {
 			setSize: setSizeMock,
 		});
 		const loadMoreButton = screen.getByRole("button", {
-			name: /button.loadMore/i,
+			name: /loadMore/i,
 		});
 		expect(loadMoreButton).not.toBeDisabled();
 		fireEvent.click(loadMoreButton);
@@ -88,7 +88,7 @@ describe("Dashboard", () => {
 	it("renders No more posts button when isReachingEnd is true", () => {
 		renderDashboard({ isReachingEnd: true });
 		const noMorePostsButton = screen.getByRole("button", {
-			name: /button.noMorePosts/i,
+			name: /noMorePosts/i,
 		});
 		expect(noMorePostsButton).toBeInTheDocument();
 		expect(noMorePostsButton).toBeDisabled();
@@ -97,7 +97,7 @@ describe("Dashboard", () => {
 	it("renders Loading button when isValidating is true", () => {
 		renderDashboard({ isValidating: true });
 		const loadingButton = screen.getByRole("button", {
-			name: /button.loading/i,
+			name: /loading/i,
 		});
 		expect(loadingButton).toBeInTheDocument();
 		expect(loadingButton).toBeDisabled();

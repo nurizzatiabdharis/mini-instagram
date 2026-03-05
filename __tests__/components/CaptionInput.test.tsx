@@ -25,7 +25,7 @@ describe("CaptionInput", () => {
 	});
 
 	it("renders input and emoji button", () => {
-		expect(screen.getByPlaceholderText("newPost.caption")).toBeInTheDocument();
+		expect(screen.getByPlaceholderText(/caption/i)).toBeInTheDocument();
 		expect(screen.getByText("😊")).toBeInTheDocument();
 	});
 
@@ -35,7 +35,7 @@ describe("CaptionInput", () => {
 	});
 
 	it("calls setCaption on input change", () => {
-		fireEvent.change(screen.getByPlaceholderText("newPost.caption"), {
+		fireEvent.change(screen.getByPlaceholderText(/caption/i), {
 			target: { value: "new caption" },
 		});
 		expect(setCaption).toHaveBeenCalledWith("new caption");

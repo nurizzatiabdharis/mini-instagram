@@ -24,7 +24,7 @@ type LayoutProps = {
 
 export default async function RootLayout({ children, params }: LayoutProps) {
 	const { locale } = await params;
-	const { t, resources } = await initTranslations(locale, i18nNamespaces);
+	const { resources } = await initTranslations(locale, i18nNamespaces);
 
 	return (
 		<html lang={locale} suppressHydrationWarning>

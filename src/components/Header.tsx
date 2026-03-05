@@ -4,11 +4,13 @@ import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import { useColorScheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
+import { useTranslation } from "react-i18next";
 import { Iconify } from "src/theme/minimal/iconify";
 import { Image } from "src/theme/minimal/image";
 import LanguageChanger from "./LanguageChanger";
 
 export default function Header() {
+	const { t } = useTranslation();
 	const { setMode, colorScheme } = useColorScheme();
 
 	return (
@@ -43,7 +45,7 @@ export default function Header() {
 					ratio="1/1"
 					sx={{ width: "25px", height: "25px" }}
 				/>
-				<Typography variant="h5">Mini Instagram</Typography>
+				<Typography variant="h5">{t("title")} 👋</Typography>
 			</Box>
 			<Box
 				sx={{

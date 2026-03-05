@@ -18,6 +18,7 @@ type Props = {
 
 export default function PostItem({ item }: Props) {
 	const { t } = useTranslation();
+
 	const renderTopInfo = () => (
 		<Box
 			sx={{

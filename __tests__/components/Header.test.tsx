@@ -10,7 +10,7 @@ describe("Header", () => {
 	it("renders logo and title", () => {
 		render(<Header />);
 		expect(screen.getByAltText("Logo")).toBeInTheDocument();
-		expect(screen.getByText("Mini Instagram")).toBeInTheDocument();
+		expect(screen.getByText(/title/i)).toBeInTheDocument();
 		expect(screen.getByTestId("LanguageChangerMock")).toBeInTheDocument();
 	});
 

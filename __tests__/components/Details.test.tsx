@@ -62,7 +62,7 @@ describe("Details", () => {
 		expect(screen.getByTestId("CommentItemMock")).toBeInTheDocument();
 	});
 
-	it("shows 'details.noComments' if items empty", () => {
+	it("shows noComments if items empty", () => {
 		mockUseGetPostComments.mockReturnValue({
 			data: {
 				items: [],
@@ -71,7 +71,7 @@ describe("Details", () => {
 			isLoading: false,
 		});
 		renderWithProviders(<Details postId="1" />);
-		expect(screen.getByText("details.noComments")).toBeInTheDocument();
+		expect(screen.getByText(/noComments/i)).toBeInTheDocument();
 	});
 
 	it("renders ErrorDisplay when error is true", () => {

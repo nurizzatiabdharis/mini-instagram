@@ -4,5 +4,3 @@ export const i18nConfig: Config = {
 	defaultLocale: "en",
 	locales: ["en", "fr", "ms"],
 };
-
-export type Locale = (typeof i18nConfig)["locales"][number];
